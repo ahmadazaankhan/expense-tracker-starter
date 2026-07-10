@@ -1,119 +1,362 @@
-.app {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+:root {
+  --color-primary: #818cf8;
+  --color-primary-dark: #6366f1;
+  --color-income: #4ade80;
+  --color-income-bg: rgba(74, 222, 128, 0.14);
+  --color-expense: #f87171;
+  --color-expense-bg: rgba(248, 113, 113, 0.14);
+  --color-bg: #0b0d13;
+  --color-surface: #161923;
+  --color-surface-alt: #1e222e;
+  --color-border: #2a2f3d;
+  --color-text: #e6e8ef;
+  --color-text-muted: #8b92a5;
+  --radius: 12px;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-h1 {
-  margin-bottom: 4px;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  color: #fff;
+  padding: 28px 24px;
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+
+.app-header h1 {
+  margin: 0 0 4px;
+  font-size: 26px;
 }
 
 .subtitle {
-  margin-bottom: 20px;
-  color: #666;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+}
+
+.summary-section {
+  margin-bottom: 24px;
 }
 
 .summary {
   display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 14px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
 .summary-card {
   flex: 1;
-  border: 1px solid #ddd;
-  padding: 14px;
-  background: #fff;
+  min-width: 160px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
 }
 
 .summary-card h3 {
-  font-size: 13px;
-  color: #888;
-  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 6px;
 }
 
 .income-amount {
-  color: green;
-  font-size: 20px;
-  font-weight: bold;
+  color: var(--color-income);
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
 }
 
 .expense-amount {
-  color: red;
-  font-size: 20px;
-  font-weight: bold;
+  color: var(--color-expense);
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
 }
 
 .balance-amount {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-text);
+}
+
+.balance-amount.negative {
+  color: var(--color-expense);
+}
+
+.balance-amount.positive {
+  color: var(--color-income);
+}
+
+.category-breakdown {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.category-breakdown h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 12px;
+}
+
+.breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.breakdown-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 4px;
+  text-transform: capitalize;
+}
+
+.breakdown-bar-track {
+  background: var(--color-bg);
+  border-radius: 6px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.breakdown-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.3s ease;
 }
 
 .add-transaction {
-  border: 1px solid #ddd;
-  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 20px;
   margin-bottom: 24px;
-  background: #fff;
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
 }
 
 .add-transaction h2 {
   font-size: 16px;
-  margin-bottom: 12px;
+  margin: 0 0 14px;
 }
 
-form {
+.type-toggle {
   display: flex;
   gap: 8px;
+  margin-bottom: 14px;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface-alt);
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.toggle-btn.income.active {
+  background: var(--color-income-bg);
+  border-color: var(--color-income);
+  color: var(--color-income);
+}
+
+.toggle-btn.expense.active {
+  background: var(--color-expense-bg);
+  border-color: var(--color-expense);
+  color: var(--color-expense);
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
   flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  min-width: 140px;
 }
 
 form input,
 form select {
-  padding: 8px;
-  border: 1px solid #ccc;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
   font-size: 14px;
+  background: var(--color-surface-alt);
+  color: var(--color-text);
 }
 
-form input[type="text"] {
-  flex: 2;
+form input::placeholder {
+  color: var(--color-text-muted);
 }
 
-form input[type="number"] {
-  flex: 1;
+form input:focus,
+form select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.form-field input {
+  width: 100%;
 }
 
 form select {
   flex: 1;
+  min-width: 130px;
 }
 
-form button {
-  padding: 8px 20px;
-  background: #333;
+.field-error {
+  color: var(--color-expense);
+  font-size: 12px;
+  margin: 4px 0 0;
+}
+
+form button.add-btn {
+  padding: 10px 24px;
+  background: var(--color-primary-dark);
   color: #fff;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 600;
+  transition: background 0.15s ease;
+}
+
+form button.add-btn:hover {
+  background: var(--color-primary);
 }
 
 .transactions {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
   margin-bottom: 24px;
 }
 
-.transactions h2 {
+.transactions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.transactions-header h2 {
   font-size: 16px;
-  margin-bottom: 12px;
+  margin: 0;
+}
+
+.transactions-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.transaction-count {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.export-btn,
+.reset-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  transition: all 0.15s ease;
+}
+
+.export-btn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.export-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reset-btn:hover {
+  border-color: var(--color-expense);
+  color: var(--color-expense);
 }
 
 .filters {
   display: flex;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
 }
 
-.filters select {
-  padding: 6px;
-  border: 1px solid #ccc;
+.filters select,
+.search-input {
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
   font-size: 13px;
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+}
+
+.search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-input {
+  flex: 2;
+  min-width: 160px;
+}
+
+.filters select:focus,
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
 }
 
 table {
@@ -122,27 +365,132 @@ table {
 }
 
 thead {
-  background: #f5f5f5;
+  background: var(--color-surface-alt);
 }
 
 th, td {
-  padding: 10px;
+  padding: 12px 10px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--color-border);
   font-size: 14px;
 }
 
 th {
-  font-size: 12px;
-  color: #888;
+  font-size: 11px;
+  color: var(--color-text-muted);
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.delete-btn {
-  padding: 4px 10px;
-  background: #eee;
-  border: 1px solid #ccc;
+tbody tr {
+  transition: background 0.1s ease;
+}
+
+tbody tr:hover {
+  background: var(--color-surface-alt);
+}
+
+.empty-row td {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 28px 10px;
+  font-size: 14px;
+}
+
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.row-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.edit-btn,
+.delete-btn,
+.save-btn,
+.cancel-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
   cursor: pointer;
   font-size: 12px;
-  color: #333;
+  font-weight: 600;
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  transition: all 0.15s ease;
+}
+
+.edit-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.delete-btn:hover,
+.cancel-btn:hover {
+  border-color: var(--color-expense);
+  color: var(--color-expense);
+}
+
+.save-btn {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: #fff;
+}
+
+.save-btn:hover {
+  background: var(--color-primary);
+}
+
+.editing-row input,
+.editing-row select {
+  padding: 6px 8px;
+  font-size: 13px;
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .summary {
+    flex-direction: column;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-field,
+  form select,
+  form button.add-btn {
+    width: 100%;
+  }
+
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody tr {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 8px;
+  }
+
+  td {
+    border-bottom: none;
+    padding: 4px 6px;
+  }
 }
